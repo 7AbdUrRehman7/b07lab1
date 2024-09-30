@@ -131,12 +131,21 @@ public class Polynomial {
         StringBuilder polynomialString = new StringBuilder();
 
         for (int i = 0; i < coefficients.length; i++) {
-            if (i != 0 && coefficients[i] >= 0) {
-                polynomialString.append("+");
-            }
-            polynomialString.append(coefficients[i]);
-            if (exponents[i] != 0) {
+            // Handle coefficient of 1 and -1
+            if (coefficients[i] == 1) {
                 polynomialString.append("x");
+            } else if (coefficients[i] == -1) {
+                polynomialString.append("-x");
+            } else {
+                if (i != 0 && coefficients[i] > 0) {
+                    polynomialString.append("+");
+                }
+                polynomialString.append(coefficients[i]);
+                polynomialString.append("x");
+            }
+
+            // Append exponent if it's not zero
+            if (exponents[i] != 0) {
                 if (exponents[i] != 1) {
                     polynomialString.append("^").append(exponents[i]);
                 }
